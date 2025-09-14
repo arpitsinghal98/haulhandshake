@@ -9,6 +9,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/app/compone
 export default function Home() {
   // Get booking URL from env (Next.js runtime config)
   const BOOKING_API_URL = process.env.NEXT_PUBLIC_BOOKING_API_URL || process.env.BOOKING_API_URL;
+  console.log("BOOKING_API_URL:", BOOKING_API_URL);
   // Remove manual open state, let Dialog manage it
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-orange-100 via-orange-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
