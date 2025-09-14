@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing load_id' }, { status: 400 });
     }
     // Build update object with only provided fields
-    const updateFields: Record<string, any> = {};
+    const updateFields: Record<string, string | undefined> = {};
     if (status) updateFields.status = status;
     if (carrier_mc_number) updateFields.carrier_mc_number = carrier_mc_number;
     if (carrier_name) updateFields.carrier_name = carrier_name;
