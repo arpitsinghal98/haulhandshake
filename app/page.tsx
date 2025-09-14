@@ -4,7 +4,7 @@ import Link from "next/link";
 // import { useState } from "react";
 import { Button } from "@/app/components/ui/button";
 import { Card, CardContent } from "@/app/components/ui/card";
-import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/app/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent } from "@/app/components/ui/dialog";
 
 export default function Home() {
   // Get booking URL from env (Next.js runtime config)
@@ -73,15 +73,13 @@ export default function Home() {
               onInteractOutside={e => e.preventDefault()}
               onEscapeKeyDown={e => e.preventDefault()}
             >
-              <DialogTitle className="text-lg font-semibold text-orange-700 px-6 pt-6 pb-2">Book a Load with AI Voice Agent</DialogTitle>
-              <div className="w-full h-[70vh] flex flex-col px-6 pb-6">
+              <div className="w-full h-[70vh] flex flex-col px-0 pb-0">
                 <iframe
                   src={BOOKING_API_URL}
                   title="AI Voice Agent Booking"
                   className="w-full h-full border-0"
                   allow="microphone; autoplay"
                 />
-                <p className="mt-2 text-orange-700 text-xs text-center opacity-80">AI Voice Agent powered booking experience</p>
               </div>
             </DialogContent>
           </Dialog>

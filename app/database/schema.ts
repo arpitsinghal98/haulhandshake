@@ -1,4 +1,9 @@
-import { pgTable, text, timestamp, numeric, integer, char, pgEnum } from 'drizzle-orm/pg-core';
+import { serial, pgTable, text, timestamp, numeric, integer, char, pgEnum } from 'drizzle-orm/pg-core';
+
+export const ai_calls = pgTable('ai_calls', {
+  id: serial('id').primaryKey(),
+  created_at: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+});
 
 export const statusEnum = pgEnum('status', ['open', 'covered', 'cancelled', 'delivered']);
 

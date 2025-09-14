@@ -8,6 +8,13 @@
       "when": 1757836026082,
       "tag": "0000_flashy_mauler",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1757851705350,
+      "tag": "0001_redundant_sinister_six",
+      "breakpoints": true
     }
   ]
 }
