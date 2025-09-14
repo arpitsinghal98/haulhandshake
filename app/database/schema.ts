@@ -24,7 +24,7 @@ export const loads = pgTable('loads', {
   miles: integer('miles'),
   dimensions: text('dimensions'),
   status: statusEnum('status').notNull().default('open'),
-  carrier_mc_number: text('carrier_mc_number'),
+  caarrier_mc_number: text('carrier_mc_number'),
   carrier_name: text('carrier_name'),
   dba_name: text('dba_name'),
   carrier_street: text('carrier_street'),
