@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/app/components/ui/card";
 import { BarChart, Bar, XAxis, CartesianGrid, Rectangle, PieChart, Pie, Sector, Label, ResponsiveContainer } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartStyle } from "@/app/components/ui/chart";
@@ -133,18 +135,39 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-100 flex flex-col items-center py-16">
-      <h1 className="text-3xl font-bold mb-8 text-orange-900">Dashboard</h1>
-  <div className="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+  <main className="min-h-screen flex flex-col bg-gradient-to-br from-orange-100 via-orange-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden items-center pt-4 pb-16">
+      {/* Container Bars Background (copied from landing page) */}
+      <svg className="absolute left-0 top-0 h-full w-full pointer-events-none z-0" width="100%" height="100%" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" style={{minHeight:'100vh'}}>
+        <rect x="80" y="0" width="12" height="100%" fill="#fb923c" fillOpacity="0.18" rx="6" />
+        <rect x="180" y="0" width="8" height="100%" fill="#fb923c" fillOpacity="0.12" rx="4" />
+        <rect x="1360" y="0" width="12" height="100%" fill="#fb923c" fillOpacity="0.18" rx="6" />
+        <rect x="1260" y="0" width="8" height="100%" fill="#fb923c" fillOpacity="0.12" rx="4" />
+        <circle cx="86" cy="40" r="10" fill="#fb923c" fillOpacity="0.25" stroke="#fb923c" strokeWidth="2" />
+        <circle cx="86" cy="860" r="10" fill="#fb923c" fillOpacity="0.25" stroke="#fb923c" strokeWidth="2" />
+        <circle cx="184" cy="80" r="7" fill="#fb923c" fillOpacity="0.18" stroke="#fb923c" strokeWidth="1.5" />
+        <circle cx="184" cy="820" r="7" fill="#fb923c" fillOpacity="0.18" stroke="#fb923c" strokeWidth="1.5" />
+        <circle cx="1366" cy="40" r="10" fill="#fb923c" fillOpacity="0.25" stroke="#fb923c" strokeWidth="2" />
+        <circle cx="1366" cy="860" r="10" fill="#fb923c" fillOpacity="0.25" stroke="#fb923c" strokeWidth="2" />
+        <circle cx="1264" cy="80" r="7" fill="#fb923c" fillOpacity="0.18" stroke="#fb923c" strokeWidth="1.5" />
+        <circle cx="1264" cy="820" r="7" fill="#fb923c" fillOpacity="0.18" stroke="#fb923c" strokeWidth="1.5" />
+        <path fill="#fb923c" fillOpacity="0.13" d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,133.3C840,107,960,85,1080,101.3C1200,117,1320,171,1380,197.3L1440,224L1440,900L0,900Z" />
+      </svg>
+  <div className="w-full max-w-4xl flex items-center justify-between mt-0 mb-4 px-2">
+        <Link href="/" className="flex items-center" aria-label="Go to home">
+          <Image src="/logo.png" alt="Company Logo" width={110} height={44} priority className="hover:opacity-80 transition-opacity" />
+        </Link>
+        <h1 className="text-3xl font-bold text-orange-900">Dashboard</h1>
+      </div>
+  <div className="w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 z-10">
     {/* Top row: Stat Cards */}
-    <Card className="shadow-xl border-0 bg-white/90 dark:bg-gray-900/80 rounded-2xl">
+  <Card className="shadow-xl border-0 bg-white/90 dark:bg-gray-900/80 rounded-2xl">
       <CardContent className="flex flex-col items-center py-10 px-4 gap-4">
         <span className="text-5xl text-orange-500 font-extrabold">{loadingLoads ? "..." : totalLoads}</span>
         <span className="text-lg text-gray-700 dark:text-gray-200 font-semibold">Total Loads</span>
         {errorLoads && <span className="text-red-500 text-sm mt-2">{errorLoads}</span>}
       </CardContent>
     </Card>
-    <Card className="shadow-xl border-0 bg-white/90 dark:bg-gray-900/80 rounded-2xl">
+  <Card className="shadow-xl border-0 bg-white/90 dark:bg-gray-900/80 rounded-2xl">
       <CardContent className="flex flex-col items-center py-10 px-4 gap-4">
         <span className="text-5xl text-blue-500 font-extrabold">{loadingAICalls ? "..." : totalAICalls}</span>
         <span className="text-lg text-gray-700 dark:text-gray-200 font-semibold">Calls Processed</span>
