@@ -37,11 +37,7 @@ export default function DashboardPage() {
       setLoadingStatus(true);
       setErrorStatus(null);
       try {
-        const res = await fetch("/api/dashboard/loads/status", {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
-          },
-        });
+        const res = await fetch("/api/dashboard/loads/status");
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         const arr: StatusPieData[] = Object.entries(data).map(([status, count]) => ({
@@ -69,11 +65,7 @@ export default function DashboardPage() {
       setLoadingEquipment(true);
       setErrorEquipment(null);
       try {
-        const res = await fetch("/api/dashboard/loads/equipment-type", {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
-          },
-        });
+        const res = await fetch("/api/dashboard/loads/equipment-type");
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         setEquipmentTypeData(data);
@@ -98,11 +90,7 @@ export default function DashboardPage() {
       setLoadingLoads(true);
       setErrorLoads(null);
       try {
-        const res = await fetch("/api/dashboard/loads/total", {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
-          },
-        });
+        const res = await fetch("/api/dashboard/loads/total");
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         setTotalLoads(data.total);
@@ -116,11 +104,7 @@ export default function DashboardPage() {
       setLoadingAICalls(true);
       setErrorAICalls(null);
       try {
-        const res = await fetch("/api/dashboard/ai-calls/total", {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
-          },
-        });
+        const res = await fetch("/api/dashboard/ai-calls/total");
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         setTotalAICalls(data.total);

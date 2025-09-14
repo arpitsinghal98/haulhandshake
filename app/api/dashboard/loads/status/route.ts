@@ -9,8 +9,6 @@ const STATUSES = ["open", "covered", "cancelled", "delivered"] as const;
 type Status = typeof STATUSES[number];
 
 export async function GET(req: NextRequest) {
-  const unauthorized = validateApiKey(req);
-  if (unauthorized) return unauthorized;
   try {
     const results = await Promise.all(
       STATUSES.map(async (status) => {

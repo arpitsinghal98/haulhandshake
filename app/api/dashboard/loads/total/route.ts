@@ -5,8 +5,6 @@ import { validateApiKey } from "@/app/api/_utils/validateApiKey";
 import { count } from "drizzle-orm";
 
 export async function GET(req: NextRequest) {
-  const unauthorized = validateApiKey(req);
-  if (unauthorized) return unauthorized;
   try {
     const result = await db.select({ total: count() }).from(loads);
     return NextResponse.json({ total: result[0]?.total ?? 0 });

@@ -5,8 +5,6 @@ import { validateApiKey } from "@/app/api/_utils/validateApiKey";
 import { eq, count } from "drizzle-orm";
 
 export async function GET(req: NextRequest) {
-  const unauthorized = validateApiKey(req);
-  if (unauthorized) return unauthorized;
   try {
     // Only count open loads
     const result = await db
