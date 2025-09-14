@@ -18,6 +18,8 @@ function evaluateLogic({ posted_rate, carrier_offer, last_broker_offer, round }:
   let base_offer = actual_rate;
   if (prev_counter !== undefined && prev_counter !== null && prev_counter > actual_rate) {
     base_offer = prev_counter;
+  } else {
+    base_offer = actual_rate;
   }
 
   let gap = carrier_offer - base_offer;
@@ -48,7 +50,7 @@ function evaluateLogic({ posted_rate, carrier_offer, last_broker_offer, round }:
   counter_rate = Math.round(counter_rate);
   return {
     next_broker_offer: counter_rate,
-    round: round_num
+    round_used: round_num
   };
 }
 
