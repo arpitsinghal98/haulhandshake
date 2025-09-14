@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { validateApiKey } from '@/app/api/_utils/validateApiKey';
 import { eq, and, ilike, gte, lte, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { loads } from '@/app/database/schema';
@@ -8,6 +9,8 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const db = drizzle(pool);
 
 export async function GET(req: NextRequest) {
+  const unauthorized = validateApiKey(req);
+  if (unauthorized) return unauthorized;
   const { searchParams } = new URL(req.url);
   const filters = {
     load_id: searchParams.get('load_id'),

@@ -1,6 +1,11 @@
+
 import { NextRequest, NextResponse } from 'next/server';
+import { validateApiKey } from '@/app/api/_utils/validateApiKey';
 
 export async function GET(req: NextRequest) {
+  const unauthorized = validateApiKey(req);
+  if (unauthorized) return unauthorized;
+
   const { searchParams } = new URL(req.url);
   const mc = searchParams.get('mc');
 
