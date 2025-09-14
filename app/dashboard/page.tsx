@@ -77,29 +77,16 @@ export default function DashboardPage() {
     }
     fetchEquipmentTypeData();
   }, []);
-  const [totalLoads, setTotalLoads] = useState<number | null>(null);
-  const [loadingLoads, setLoadingLoads] = useState(true);
-  const [errorLoads, setErrorLoads] = useState<string | null>(null);
 
   const [totalAICalls, setTotalAICalls] = useState<number | null>(null);
   const [loadingAICalls, setLoadingAICalls] = useState(true);
   const [errorAICalls, setErrorAICalls] = useState<string | null>(null);
 
+  const [totalFinalizedRate, setTotalFinalizedRate] = useState<number | null>(null);
+  const [loadingFinalizedRate, setLoadingFinalizedRate] = useState(true);
+  const [errorFinalizedRate, setErrorFinalizedRate] = useState<string | null>(null);
+
   useEffect(() => {
-    async function fetchTotalLoads() {
-      setLoadingLoads(true);
-      setErrorLoads(null);
-      try {
-        const res = await fetch("/api/dashboard/loads/total");
-        if (!res.ok) throw new Error("Failed to fetch");
-        const data = await res.json();
-        setTotalLoads(data.total);
-      } catch (e: unknown) {
-        setErrorLoads(e instanceof Error ? e.message : "Unknown error");
-      } finally {
-        setLoadingLoads(false);
-      }
-    }
     async function fetchTotalAICalls() {
       setLoadingAICalls(true);
       setErrorAICalls(null);
@@ -114,8 +101,22 @@ export default function DashboardPage() {
         setLoadingAICalls(false);
       }
     }
-    fetchTotalLoads();
+    async function fetchTotalFinalizedRate() {
+      setLoadingFinalizedRate(true);
+      setErrorFinalizedRate(null);
+      try {
+        const res = await fetch("/api/dashboard/loads/finalized-rate-total");
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
+        setTotalFinalizedRate(data.total);
+      } catch (e: unknown) {
+        setErrorFinalizedRate(e instanceof Error ? e.message : "Unknown error");
+      } finally {
+        setLoadingFinalizedRate(false);
+      }
+    }
     fetchTotalAICalls();
+    fetchTotalFinalizedRate();
   }, []);
 
   return (
@@ -147,16 +148,16 @@ export default function DashboardPage() {
     {/* Top row: Stat Cards */}
   <Card className="shadow-xl border-0 bg-white/90 dark:bg-gray-900/80 rounded-2xl">
       <CardContent className="flex flex-col items-center py-10 px-4 gap-4">
-        <span className="text-5xl text-orange-500 font-extrabold">{loadingLoads ? "..." : totalLoads}</span>
-        <span className="text-lg text-gray-700 dark:text-gray-200 font-semibold">Total Loads</span>
-        {errorLoads && <span className="text-red-500 text-sm mt-2">{errorLoads}</span>}
+        <span className="text-5xl text-blue-500 font-extrabold">{loadingAICalls ? "..." : totalAICalls}</span>
+        <span className="text-lg text-gray-700 dark:text-gray-200 font-semibold">Calls Processed</span>
+        {errorAICalls && <span className="text-red-500 text-sm mt-2">{errorAICalls}</span>}
       </CardContent>
     </Card>
   <Card className="shadow-xl border-0 bg-white/90 dark:bg-gray-900/80 rounded-2xl">
       <CardContent className="flex flex-col items-center py-10 px-4 gap-4">
-        <span className="text-5xl text-blue-500 font-extrabold">{loadingAICalls ? "..." : totalAICalls}</span>
-        <span className="text-lg text-gray-700 dark:text-gray-200 font-semibold">Calls Processed</span>
-        {errorAICalls && <span className="text-red-500 text-sm mt-2">{errorAICalls}</span>}
+        <span className="text-5xl text-green-500 font-extrabold">{loadingFinalizedRate ? "..." : `$${totalFinalizedRate?.toLocaleString() || 0}`}</span>
+        <span className="text-lg text-gray-700 dark:text-gray-200 font-semibold">Total Revenue</span>
+        {errorFinalizedRate && <span className="text-red-500 text-sm mt-2">{errorFinalizedRate}</span>}
       </CardContent>
     </Card>
     {/* Second row: Pie and Bar Charts */}
