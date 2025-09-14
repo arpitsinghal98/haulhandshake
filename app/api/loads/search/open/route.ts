@@ -56,7 +56,11 @@ export async function GET(req: NextRequest) {
       delivery_datetime: row.delivery_datetime ? row.delivery_datetime.toISOString() : null,
     }));
     return NextResponse.json(formatted);
-  } catch (e: any) {
-    return NextResponse.json({ error: 'Error retrieving loads', details: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    let message = 'Unknown error';
+    if (e && typeof e === 'object' && 'message' in e && typeof (e as { message?: unknown }).message === 'string') {
+      message = (e as { message: string }).message;
+    }
+    return NextResponse.json({ error: 'Error retrieving loads', details: message }, { status: 500 });
   }
 }

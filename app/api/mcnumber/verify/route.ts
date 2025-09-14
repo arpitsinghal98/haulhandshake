@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
     }
     const carrier_info = content.carrier;
     // Check if active is 'Y', 'Yes' (case-insensitive), or true
-    let activeRaw = carrier_info.allowedToOperate;
+  const activeRaw = carrier_info.allowedToOperate;
     let active = false;
     if (typeof activeRaw === 'string') {
       active = /^(y|yes)$/i.test(activeRaw.trim());
@@ -58,7 +58,11 @@ export async function GET(req: NextRequest) {
         country: carrier_info.phyCountry,
       },
     });
-  } catch (e: any) {
-    return NextResponse.json({ error: 'Error fetching data from FMCSA', details: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    let message = 'Unknown error';
+    if (e && typeof e === 'object' && 'message' in e && typeof (e as { message?: unknown }).message === 'string') {
+      message = (e as { message: string }).message;
+    }
+    return NextResponse.json({ error: 'Error fetching data from FMCSA', details: message }, { status: 500 });
   }
 }

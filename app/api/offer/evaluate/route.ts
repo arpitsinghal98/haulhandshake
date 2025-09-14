@@ -22,7 +22,7 @@ function evaluateLogic({ posted_rate, carrier_offer, last_broker_offer, round }:
     base_offer = actual_rate;
   }
 
-  let gap = carrier_offer - base_offer;
+  const gap = carrier_offer - base_offer;
   let counter_rate: number;
 
   if (round_num === 1) {
