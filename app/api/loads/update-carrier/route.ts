@@ -6,12 +6,12 @@ import { eq } from 'drizzle-orm';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { load_id, status, carrier_mc_number, carrier_name, dba_name, carrier_street, carrier_city, carrier_state, carrier_zip, carrier_country } = body;
+    const { load_id, status, carrier_mc_number, carrier_name, dba_name, carrier_street, carrier_city, carrier_state, carrier_zip, carrier_country, finalized_rate } = body;
     if (!load_id) {
       return NextResponse.json({ error: 'Missing load_id' }, { status: 400 });
     }
     // Build update object with only provided fields
-    const updateFields: Record<string, string | undefined> = {};
+    const updateFields: Record<string, string | number | undefined> = {};
     if (status) updateFields.status = status;
     if (carrier_mc_number) updateFields.carrier_mc_number = carrier_mc_number;
     if (carrier_name) updateFields.carrier_name = carrier_name;
@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
     if (carrier_state) updateFields.carrier_state = carrier_state;
     if (carrier_zip) updateFields.carrier_zip = carrier_zip;
     if (carrier_country) updateFields.carrier_country = carrier_country;
+    if (finalized_rate !== undefined) updateFields.finalized_rate = finalized_rate;
     if (Object.keys(updateFields).length === 0) {
       return NextResponse.json({ error: 'No fields to update' }, { status: 400 });
     }
