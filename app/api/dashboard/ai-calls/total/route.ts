@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { db } from "@/app/database/db.server";
 import { ai_calls } from "@/app/database/schema";
-import { validateApiKey } from "@/app/api/_utils/validateApiKey";
 import { count } from "drizzle-orm";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const result = await db.select({ total: count() }).from(ai_calls);
     return NextResponse.json({ total: result[0]?.total ?? 0 });

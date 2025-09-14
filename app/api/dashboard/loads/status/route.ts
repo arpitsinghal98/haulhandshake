@@ -1,14 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { db } from "@/app/database/db.server";
 import { loads } from "@/app/database/schema";
-import { validateApiKey } from "@/app/api/_utils/validateApiKey";
 import { eq, count } from "drizzle-orm";
 
 const STATUSES = ["open", "covered", "cancelled", "delivered"] as const;
 
 type Status = typeof STATUSES[number];
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const results = await Promise.all(
       STATUSES.map(async (status) => {
