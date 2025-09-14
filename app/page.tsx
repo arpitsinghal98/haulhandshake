@@ -1,13 +1,15 @@
-
-
-
-
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+// import { useState } from "react";
 import { Button } from "@/app/components/ui/button";
 import { Card, CardContent } from "@/app/components/ui/card";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle } from "@/app/components/ui/dialog";
 
 export default function Home() {
+  // Get booking URL from env (Next.js runtime config)
+  const BOOKING_API_URL = process.env.NEXT_PUBLIC_BOOKING_API_URL || process.env.BOOKING_API_URL;
+  // Remove manual open state, let Dialog manage it
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-orange-100 via-orange-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
       {/* Container Bars Background */}
@@ -56,11 +58,33 @@ export default function Home() {
               Go to Dashboard
             </Button>
           </Link>
-          <Link href="/book">
-            <Button size="lg" variant="outline" className="text-lg px-10 py-6 rounded-full shadow-lg border-orange-500 text-orange-700 dark:text-orange-300">
-              Book a Load
-            </Button>
-          </Link>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-lg px-10 py-6 rounded-full shadow-lg border-orange-500 text-orange-700 dark:text-orange-300"
+              >
+                Book a Load
+              </Button>
+            </DialogTrigger>
+            <DialogContent
+              className="max-w-3xl w-full p-0 overflow-hidden bg-white rounded-xl border-orange-200"
+              onInteractOutside={e => e.preventDefault()}
+              onEscapeKeyDown={e => e.preventDefault()}
+            >
+              <DialogTitle className="text-lg font-semibold text-orange-700 px-6 pt-6 pb-2">Book a Load with AI Voice Agent</DialogTitle>
+              <div className="w-full h-[70vh] flex flex-col px-6 pb-6">
+                <iframe
+                  src={BOOKING_API_URL}
+                  title="AI Voice Agent Booking"
+                  className="w-full h-full border-0"
+                  allow="microphone; autoplay"
+                />
+                <p className="mt-2 text-orange-700 text-xs text-center opacity-80">AI Voice Agent powered booking experience</p>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
 
