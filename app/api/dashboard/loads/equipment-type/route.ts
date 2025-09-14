@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/app/database/db.server";
 import { loads } from "@/app/database/schema";
 import { validateApiKey } from "@/app/api/_utils/validateApiKey";
-import { eq, count, sql } from "drizzle-orm";
+import { eq, count } from "drizzle-orm";
 
 export async function GET(req: NextRequest) {
   const unauthorized = validateApiKey(req);

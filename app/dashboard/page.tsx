@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/app/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/app/components/ui/card";
 import { BarChart, Bar, XAxis, CartesianGrid, Rectangle, PieChart, Pie, Sector, Label, ResponsiveContainer } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartStyle } from "@/app/components/ui/chart";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/components/ui/select";
@@ -51,8 +51,8 @@ export default function DashboardPage() {
         }));
         setStatusData(arr);
         setActiveStatus(arr[0]?.status || "open");
-      } catch (e: any) {
-        setErrorStatus(e.message || "Unknown error");
+      } catch (e: unknown) {
+        setErrorStatus(e instanceof Error ? e.message : "Unknown error");
       } finally {
         setLoadingStatus(false);
       }
@@ -77,8 +77,8 @@ export default function DashboardPage() {
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         setEquipmentTypeData(data);
-      } catch (e: any) {
-        setErrorEquipment(e.message || "Unknown error");
+      } catch (e: unknown) {
+        setErrorEquipment(e instanceof Error ? e.message : "Unknown error");
       } finally {
         setLoadingEquipment(false);
       }
@@ -106,8 +106,8 @@ export default function DashboardPage() {
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         setTotalLoads(data.total);
-      } catch (e: any) {
-        setErrorLoads(e.message || "Unknown error");
+      } catch (e: unknown) {
+        setErrorLoads(e instanceof Error ? e.message : "Unknown error");
       } finally {
         setLoadingLoads(false);
       }
@@ -124,8 +124,8 @@ export default function DashboardPage() {
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         setTotalAICalls(data.total);
-      } catch (e: any) {
-        setErrorAICalls(e.message || "Unknown error");
+      } catch (e: unknown) {
+        setErrorAICalls(e instanceof Error ? e.message : "Unknown error");
       } finally {
         setLoadingAICalls(false);
       }
