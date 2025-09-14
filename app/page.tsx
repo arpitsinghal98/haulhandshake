@@ -40,7 +40,7 @@ export default function Home() {
           alt="HaulHandshake Logo"
           width={110}
           height={110}
-          className="mb-8 rounded-full shadow-2xl border-4 border-white dark:border-gray-800 z-10"
+          className="mb-4 -mt-8 rounded-full shadow-2xl z-10"
           priority
         />
         <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 drop-shadow-lg z-10">
@@ -55,7 +55,7 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row gap-6 justify-center z-10">
           <Link href="/dashboard">
             <Button size="lg" className="text-lg px-10 py-6 rounded-full shadow-lg bg-orange-500 hover:bg-orange-600 text-white">
-              Go to Dashboard
+              Dashboard
             </Button>
           </Link>
           <Dialog>
