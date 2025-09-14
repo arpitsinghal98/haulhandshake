@@ -137,8 +137,9 @@ export default function DashboardPage() {
         <path fill="#fb923c" fillOpacity="0.13" d="M0,160L60,170.7C120,181,240,203,360,197.3C480,192,600,160,720,133.3C840,107,960,85,1080,101.3C1200,117,1320,171,1380,197.3L1440,224L1440,900L0,900Z" />
       </svg>
   <div className="w-full max-w-4xl flex items-center justify-between mt-0 mb-4 px-2">
-        <Link href="/" className="flex items-center" aria-label="Go to home">
-          <Image src="/logo.png" alt="Company Logo" width={110} height={44} priority className="hover:opacity-80 transition-opacity" />
+        <Link href="/" className="flex items-center gap-3" aria-label="Go to home">
+          <Image src="/logo.png" alt="HaulHandshake Logo" width={48} height={48} priority className="hover:opacity-80 transition-opacity" />
+          <span className="text-2xl font-bold text-orange-900 tracking-tight">HaulHandshake</span>
         </Link>
         <h1 className="text-3xl font-bold text-orange-900">Dashboard</h1>
       </div>
