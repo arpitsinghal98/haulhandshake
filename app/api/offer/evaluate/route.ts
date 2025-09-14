@@ -57,19 +57,6 @@ function evaluateLogic({ posted_rate, carrier_offer, last_broker_offer, round }:
 import { NextRequest, NextResponse } from 'next/server';
 import { validateApiKey } from '@/app/api/_utils/validateApiKey';
 
-interface EvalIn {
-  posted_rate: number;
-  carrier_offer: number;
-  last_broker_offer?: number | null;
-  round: number;
-}
-
-interface EvalOut {
-  next_broker_offer: number | null;
-  round: number;
-}
-
-const API_KEY = process.env.API_KEY;
 
 
 

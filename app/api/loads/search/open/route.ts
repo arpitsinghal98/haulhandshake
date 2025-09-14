@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validateApiKey } from '@/app/api/_utils/validateApiKey';
 import { eq, and, ilike, gte, lte, sql } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/node-postgres';
 import { loads } from '@/app/database/schema';
-import { Pool } from 'pg';
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const db = drizzle(pool);
+import { db } from '@/app/database/db.server';
 
 export async function GET(req: NextRequest) {
   const unauthorized = validateApiKey(req);
