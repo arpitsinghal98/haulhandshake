@@ -40,7 +40,7 @@ export default function Home() {
           alt="HaulHandshake Logo"
           width={110}
           height={110}
-          className="mb-4 -mt-8 rounded-full shadow-2xl z-10"
+          className="mb-4 -mt-14 rounded-full shadow-2xl z-10"
           priority
         />
         <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 dark:text-white mb-4 drop-shadow-lg z-10">
