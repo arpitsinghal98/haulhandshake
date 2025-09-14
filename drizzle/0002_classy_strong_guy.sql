@@ -1,0 +1,1 @@
+ALTER TABLE "loads" ADD COLUMN "finalized_rate" integer;

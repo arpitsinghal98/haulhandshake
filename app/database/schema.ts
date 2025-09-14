@@ -16,6 +16,7 @@ export const loads = pgTable('loads', {
   delivery_datetime: timestamp('delivery_datetime', { withTimezone: true }).notNull(),
   equipment_type: text('equipment_type').notNull(),
   loadboard_rate: numeric('loadboard_rate', { precision: 10, scale: 2 }).notNull(),
+  finalized_rate: integer('finalized_rate'),
   notes: text('notes'),
   weight: integer('weight'),
   commodity_type: text('commodity_type'),

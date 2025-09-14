@@ -15,6 +15,13 @@
       "when": 1757851705350,
       "tag": "0001_redundant_sinister_six",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1757885154215,
+      "tag": "0002_classy_strong_guy",
+      "breakpoints": true
     }
   ]
 }
